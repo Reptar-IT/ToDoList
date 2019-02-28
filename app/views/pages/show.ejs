@@ -1,0 +1,66 @@
+<% include ../templates/head %>
+
+  <div class="box" id="heading">
+    <% let timestamp = {day: "numeric", month: "numeric", year: "numeric"}; %>
+    <h1><%= title %></h1>
+    <div class="date-box">
+      <p class="desc">
+        <%= description %>
+      </p>
+      <p class="date">
+        <a href="/" class="back">back</a>
+        Last updated: <%= date.toLocaleDateString("en-US", timestamp); %>
+      </p>
+    </div>
+  </div>
+  <div class="box">
+    <% items.forEach(function(item) { %>
+      <div class="list">
+        <div class="list-item">
+          <form class="list-item" action="/update-item/<%= item._id %>" method="post">
+            <% if(item.status === 1) { %>
+              <input class="checker checked" name="checkbox" value="0" type="checkbox" onchange="this.form.submit()">
+            <% } else { %>
+              <input class="checker" name="checkbox" value="1" type="checkbox" onchange="this.form.submit()">
+            <% } %>
+            <input type="hidden" name="itemId" value="<%= item._id %>">
+            <input type="hidden" name="listId" value="<%= id %>">
+          </form>
+          <form class="desc-form" action="/delete-item/<%= item.name %>" method="post">
+            <div class="list-item">
+              <% if(item.status === 1) { %>
+                <p class="lists checked">
+                  <%= item.name %>
+                  <small>  <%= item.description %></small>
+                </p>
+              <% } else { %>
+                <p class="lists">
+                  <%= item.name %>
+                  <small>  <%= item.description %></small>
+                </p>
+              <% } %>
+              <input type="hidden" name="listId" value="<%= id %>">
+            <!-- <button type="submit" class="edit" name="deleteList" value=" list._id "><i class="fas fa-edit"></i></button>  -->
+              <button type="submit" class="delItem" name="itemId" value="<%= item._id %>"><i class="trash-can fas fa-trash-alt"></i></button>
+            </div>
+          </form>
+        </div>
+
+        <div class="date-box">
+          <p class="date">
+            Last updated: <%= item.updated_at.toLocaleDateString("en-US", timestamp); %>
+          </p>
+        </div>
+      </div>
+    <% }); %>
+    <form class="item" action="/<%= title %>" method="post">
+      <div class="">
+        <input type="text" name="title" placeholder="New item" autocomplete="off">
+        <textarea name="desc" rows="1" class="form-control" cols="80" placeholder="Item description"></textarea>
+      </div>
+      <button type="submit" class="edit" name="listId" value="<%= id %>"><i class="fas fa-edit"></i></button>
+      <!-- <button type="submit" class="addItem"  name="listId" value="">+</button> -->
+    </form>
+  </div>
+
+<% include ../templates/footer %>

@@ -1,0 +1,58 @@
+<% include ../templates/head %>
+
+  <div class="box" id="heading">
+    <h1>To Do List</h1>
+    <p class="date">
+      Today's date: <%= date %>
+    </p>
+  </div>
+  <div class="box">
+    <% lists.forEach(function(list) { %>
+      <div class="list">
+        <div class="list-item">
+          <form class="list-item" action="/update-list" method="post">
+            <% if(list.status === 1) { %>
+              <input class="checker" name="checkbox" value="0" type="checkbox" onchange="this.form.submit()">
+            <% } else { %>
+              <input class="checker" name="checkbox" value="1" type="checkbox" onchange="this.form.submit()">
+            <% } %>
+            <input type="hidden" name="listId" value="<%= list._id %>">
+          </form>
+          <form class="desc-form" action="/delete-list" method="post">
+            <div class="list-item">
+              <% if(list.status === 1) { %>
+                <p class="lists checked">
+                  <a href="/<%= list._id + "/" + list.name %>"><%= list.name %></a>
+                  <small>  <%= list.description %></small>
+                </p>
+              <% } else { %>
+                <p class="lists">
+                  <a href="/<%= list._id + "/" + list.name %>"><%= list.name %></a>
+                  <small>  <%= list.description %></small>
+                </p>
+              <% } %>
+              <!-- <button type="submit" class="edit" name="deleteList" value=" list._id "><i class="fas fa-edit"></i></button>  -->
+              <button type="submit" class="delItem" name="deleteList" value="<%= list._id %>"><i class="fas fa-trash-alt"></i></button>
+            </div>
+          </form>
+        </div>
+
+        <div class="date-box">
+          <p class="date">
+            <% let options = {day: "numeric", month: "numeric", year: "numeric"}; %>
+            Last updated: <%= list.updated_at.toLocaleDateString("en-US", options); %>
+          </p>
+        </div>
+      </div>
+    <% }); %>
+    <form class="item" action="/" method="post">
+      <div class="">
+        <input type="text" name="list" placeholder="New List" autocomplete="off">
+        <textarea name="desc" rows="1" class="form-control" cols="80" placeholder="List description"></textarea>
+      </div>
+      <button type="submit" class="edit" name="createListItem" value=""><i class="fas fa-edit"></i></button>
+      <!-- <button type="submit" class="addItem" name="createListItem" value="">+</button> -->
+    </form>
+  </div>
+
+<% include ../templates/footer %>

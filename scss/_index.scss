@@ -1,0 +1,180 @@
+html {
+  background-color: #E4E9FD;
+  background-image: -webkit-linear-gradient(65deg, #f5ffc3 50%, #7dd8c7 50%);
+  min-height: 1000px;
+  font-family: 'helvetica neue';
+}
+
+h1 {
+  color: #393e46;
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.box {
+  max-width: 400px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+#heading {
+  background-color: #f5ffc3;
+  text-align: center;
+}
+
+.item, .list, .list-item, .list-desc  {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #F1F1F1;
+}
+
+.item:last-child, .list:last-child, .list-item:last-child {
+  border-bottom: 0;
+}
+
+.date-box, .list, .desc-form {
+  display: block;
+}
+
+.lists {
+  background: transparent;
+  text-align: left;
+  width: 100%;
+}
+
+.list-item, .desc-form {
+  border-bottom: none;
+  margin: 0;
+  text-align: left;
+}
+
+.desc {
+  padding-top: 0;
+}
+
+.desc-form {
+  width: 347px;
+}
+
+.date, .back {
+  font-size: 15px;
+  text-align: right;
+  padding: 0 5% 3% 0;
+}
+
+.back {
+  text-align: left;
+}
+
+.title-box, .date-box {
+  text-align: left;
+  width: 100%;
+}
+
+.checked {
+  text-decoration: line-through;
+  text-decoration-color: #612c83;
+}
+
+input[type="checkbox"] {
+  margin: 20px;
+}
+
+a {
+  color: #373640;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #90aeff;
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #606470;
+}
+
+form {
+  text-align: center;
+  margin-left: 20px;
+}
+
+button[class="delItem"] {
+  border: none;
+  background-color: transparent;
+  color: #b7b7b7;
+  font-size: 1.5rem;
+  border-width: 0;
+  margin: 1%;
+}
+button[class="delItem"]:hover {
+  color: #ff7100;
+}
+button[class="delItem"]:focus {
+  color: #ff2400;
+  outline: 0;
+  box-shadow: none!important;
+}
+
+button[class="edit"] {
+  border: none;
+  background-color: transparent;
+  color: #93deff;
+  font-size: 3rem;
+  border-width: 0;
+  margin: 1%;
+}
+button[class="edit"]:hover {
+  color: #1eafed;
+}
+button[class="edit"]:focus {
+  color: #53d397;
+  outline: 0;
+  box-shadow: none!important;
+}
+
+button[class="addItem"] {
+  min-height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border-color: transparent;
+  background-color: #db456f;
+  color: #fff;
+  font-size: 280%;
+  border-width: 0;
+  margin: 5%;
+}
+
+input[type="text"], textarea {
+  text-align: left;
+  height: 60px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 200;
+  width: 80%;
+}
+
+input[type="text"]:focus, textarea:focus {
+  outline: none;
+  box-shadow: inset 0 -3px 0 0 #35013f;
+}
+
+::placeholder {
+  color: #b7b7b7;
+  opacity: 1;
+}
+
+footer {
+  color: white;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
