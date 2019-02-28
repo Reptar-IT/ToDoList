@@ -12,8 +12,10 @@ const view = __dirname + "/app/views/";
 app.use(express.static(__dirname + "/public/"));
 
 mongoose.connect("mongodb+srv://<USERNAME>:<PASSWORD>@cluster0-dvn5y.mongodb.net/" + "<databaseNameDB>" + "?retryWrites=true/" , { useNewUrlParser: true });
+
 // Create timestamps
 const timestamps = {timestamps: { createdAt: "created_at", updatedAt: "updated_at" }};
+
 // Create schemas
 const itemSchema = new mongoose.Schema({name: {type: String, required:[1, "please insert a valid list name"]}, description: {type: String, max: 100}, status: Number
 }, timestamps);
@@ -30,6 +32,7 @@ let options = {day: "numeric", month: "numeric", year: "numeric"};
 let day = date.toLocaleDateString("en-US", options);
 
 app.get("/", function(req, res) {
+  // Read all from database
   List.find({}, function (err, list) {
     if (err) {
       console.log(err);
@@ -40,6 +43,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/:id/:listname", function(req, res) {
+  // find one by provided id
   List.findById(req.params.id, function (err, list) {
     if (err) {
       console.log(err);
@@ -52,13 +56,14 @@ app.get("/:id/:listname", function(req, res) {
 });
 
 app.post("/", function(req, res) {
+  // Create, save parent and redirect
   const list = new List({ name: _.capitalize(req.body.list), description: _.capitalize(req.body.desc) });
   list.save();
   res.redirect("/");
 });
 
 app.post("/update-list", function(req, res) {
-  // find and update the doc in parent with the given id
+  // find and update parent with provided id
   List.findOneAndUpdate({_id: req.body.listId}, {
     $set: { status: req.body.checkbox }
   }, {new: true}, function(err, list){
@@ -71,7 +76,7 @@ app.post("/update-list", function(req, res) {
 });
 
 app.post("/delete-list", function(req, res) {
-  // find model document and delete where id equal provided id
+  // find and delete parent with provided id
   List.deleteOne({_id: req.body.deleteList}, function(err){
     if(err) return handleError(err);
   });
@@ -79,7 +84,7 @@ app.post("/delete-list", function(req, res) {
 });
 
 app.post("/:itemTitle", function(req, res) {
-  // Update by ID
+  // Find parent by provided id, push new document to child array, save and redirect
   List.findOneAndUpdate({_id: req.body.listId}, {
       $push: { items: {name: _.capitalize(req.body.title), description: _.capitalize(req.body.desc)} }
     }, function(err, list){
@@ -92,7 +97,7 @@ app.post("/:itemTitle", function(req, res) {
 });
 
 app.post("/update-item/:id", function(req, res) {
-  // find the doc in an array somewhere within the list with the given id
+  // find parent by provided child id, update specific field in specific child array
   List.findOneAndUpdate({"items._id": req.body.itemId}, {
     $set: { "items.$.status": req.body.checkbox }
   }, {new: true}, function(err, list){
@@ -105,7 +110,7 @@ app.post("/update-item/:id", function(req, res) {
 });
 
 app.post("/delete-item/:title", function(req, res) {
-  // find the doc in an array somewhere within the list with the given id
+  // find parent by provided child id, delete specific child from array
   List.findOneAndUpdate({"items._id": req.body.itemId}, {
     $pull: { items: { _id: req.body.itemId } }
   }, {new: true}, function(err, list){
