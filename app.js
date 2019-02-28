@@ -11,7 +11,7 @@ app.set("view engine", "ejs");
 const view = __dirname + "/app/views/";
 app.use(express.static(__dirname + "/public/"));
 
-mongoose.connect("mongodb+srv://king-mancer:SRqqv4o1iim4TyZK@cluster0-dvn5y.mongodb.net/" + "todolistDB" + "?retryWrites=true/" , { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://<USERNAME>:<PASSWORD>@cluster0-dvn5y.mongodb.net/" + "<databaseNameDB>" + "?retryWrites=true/" , { useNewUrlParser: true });
 // Create timestamps
 const timestamps = {timestamps: { createdAt: "created_at", updatedAt: "updated_at" }};
 // Create schemas
