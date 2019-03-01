@@ -5,4 +5,4 @@ A web application for creating lists of any topic with list items. A line is dra
 - MangoDB.Atlas
 - Mongo Shell
 - Mongoose API
-- lodash API
+- Lodash API
