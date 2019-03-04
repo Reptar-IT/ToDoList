@@ -16,3 +16,8 @@ Creating CRUD web applications from scratch using:
 - Git
 - gitignore
 - Heroku
+
+# How to install
+
+Enter the root directory within your terminal.
+Enter the command `-nmp i`.
