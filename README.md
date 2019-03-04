@@ -1,8 +1,18 @@
 # ToDoList 
-A web application for creating lists of any topic with list items. A line is drawn through items that were checked off.
+A handy tool with a beautiful design to help you track your goals.
 
 # What I learned
+Creating CRUD web applications from scratch using:
+- Node.js
+- Express.js
+- NPM
+- Ejs
+- Request
+- Body Parser
 - MangoDB.Atlas
 - Mongo Shell
 - Mongoose API
 - Lodash API
+- Git
+- gitignore
+- Heroku
